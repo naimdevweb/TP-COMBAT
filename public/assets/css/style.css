@@ -1,0 +1,353 @@
+/* Règles générales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: radial-gradient(circle at center, #1e1e2f, #000000);
+    color: #ffffff;
+    line-height: 1.5;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* === HEADER === */
+header {
+    background: linear-gradient(90deg, #ff7a18, #e52e71, #9a30a3);
+    padding: 20px 0;
+    text-align: center;
+    border-bottom: 4px solid #000;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.6);
+    animation: slideIn 1s ease-out;
+}
+
+header h1 {
+    font-size: 3rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    font-weight: bold;
+    text-shadow: 0 0 10px #ffffff, 0 0 20px #ff007f, 0 0 30px #ff007f;
+    animation: neon-pulse 1.5s infinite alternate;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes neon-pulse {
+    0% {
+        text-shadow: 0 0 10px #ffffff, 0 0 20px #ff007f, 0 0 30px #ff007f;
+    }
+    100% {
+        text-shadow: 0 0 20px #ffffff, 0 0 30px #ff007f, 0 0 50px #ff007f;
+    }
+}
+
+nav {
+    margin-top: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #ffffff;
+    margin: 0 15px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: transform 0.3s, color 0.3s;
+}
+
+nav a:hover {
+    color: #ff007f;
+    transform: scale(1.1);
+}
+
+/* === MAIN SECTION === */
+main {
+    flex: 1;
+    text-align: center;
+    padding: 50px 20px;
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+main h2 {
+    font-size: 2.5rem;
+    color: #ffbf00;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    animation: glow 1.5s infinite alternate;
+}
+
+@keyframes glow {
+    0% {
+        text-shadow: 0 0 5px #ffbf00, 0 0 10px #ff9f00, 0 0 20px #ff7f00;
+    }
+    100% {
+        text-shadow: 0 0 15px #ffbf00, 0 0 25px #ff9f00, 0 0 35px #ff7f00;
+    }
+}
+
+main p {
+    font-size: 1.5rem;
+    margin-bottom: 40px;
+    color: #eaeaea;
+    animation: bounceIn 1s ease-out;
+}
+
+@keyframes bounceIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* === FORMULAIRE === */
+main form {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: zoomIn 1s ease-out;
+}
+
+@keyframes zoomIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+main form label {
+    font-size: 1.2rem;
+    color: #ffffff;
+    display: block;
+    margin-bottom: 10px;
+}
+
+main form input[type="text"],
+main form input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ff007f;
+    border-radius: 5px;
+    background-color: #161b22;
+    color: #ffffff;
+    font-size: 1rem;
+    transition: border 0.3s, box-shadow 0.3s;
+}
+
+main form input:focus {
+    border: 2px solid #ffbf00;
+    box-shadow: 0 0 10px #ffbf00;
+    outline: none;
+}
+
+main form button {
+    display: inline-block;
+    width: 100%;
+    padding: 10px 20px;
+    background: linear-gradient(90deg, #ff007f, #ff4500);
+    border: none;
+    color: #ffffff;
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: buttonPop 1.2s infinite ease-in-out;
+}
+
+@keyframes buttonPop {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+main form button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 69, 0, 0.6);
+    
+}
+
+/* === CARTE DU HÉROS === */
+.hero-card {
+    width: 300px;
+    margin: 50px auto;
+    background: linear-gradient(135deg, #ff007f, #5700ff);
+    padding: 20px;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+    animation: heroSlideIn 1s ease-out;
+}
+
+@keyframes heroSlideIn {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.hero-card img {
+    max-width: 80%;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+.hero-card .hero-name {
+    font-size: 1.5rem;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+}
+
+.hero-card .hero-details {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    border-radius: 10px;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.hero-card button {
+    background: linear-gradient(90deg, #ff007f, #5700ff);
+    border: none;
+    color: #ffffff;
+    font-size: 1rem;
+    padding: 10px 20px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hero-card button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(255, 69, 0, 0.6);
+}
+
+
+.game-container {
+    width: 90%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.battlefield {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 30px 0;
+    background: url('./assets/images/battlefield.jpg') no-repeat center center/cover;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+    height: 400px;
+}
+
+.character {
+    width: 45%;
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+.character img {
+    width: 200px;
+    height: auto;
+    transition: transform 0.2s;
+}
+
+.character:hover img {
+    transform: scale(1.1);
+}
+
+.health-bar {
+    width: 100%;
+    background: #333;
+    height: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.health {
+    height: 100%;
+    background: linear-gradient(90deg, #00ff00, #ff0000);
+    transition: width 0.3s;
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #ffffff;
+    background: linear-gradient(90deg, #ff007f, #ff4500);
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    margin: 0 10px;
+}
+
+button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 69, 0, 0.6);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
