@@ -55,11 +55,12 @@ if (isset($_SESSION['hero'])) {
 
     <div class="hero-details">
        
-       <p class="hp">Attack: <?= htmlspecialchars($attack) ?></p>
+       <p  class="hp">Attack: <?= htmlspecialchars($attack) ?></p>
    </div>
 
    
-    <button class="ready-button" onclick="alert('<?= htmlspecialchars($nom) ?> est prêt à combattre !')">Prêt à combattre</button>
+    <a href="./fight.php" class="ready-link" onclick="alert('<?= htmlspecialchars($nom) ?> est prêt à combattre !')">Prêt à combattre</a>
+
 
    
 </div>

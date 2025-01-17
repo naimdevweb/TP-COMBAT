@@ -8,11 +8,11 @@ abstract class Entite {
         $this->hp = $hp;
     }
 
-    public function getNom() {
+    public function getNom(): string {
         return $this->nom;
     }
 
-    public function getHp() {
+    public function getHp(): int {
         return $this->hp;
     }
 

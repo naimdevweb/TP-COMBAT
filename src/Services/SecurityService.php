@@ -1,26 +1,18 @@
 <?php
-
-
 require_once '../utils/autoload.php';
 
 class SecurityService {
-
-    // Méthode de validation et de création du héros
     public function securite() {
-
-        // Initialiser les erreurs et les données
         $errors = [];
-        $nom = $image = $hp = '';
+        $nom = $image = $hp = $attack = '';
 
-        // Vérifier si le formulaire a été soumis via POST
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-            // Récupérer et sécuriser les données envoyées via POST
+            // Récupérer et sécuriser les données
             $nom = isset($_POST['nom']) ? trim($_POST['nom']) : '';
             $image = isset($_POST['image']) ? trim($_POST['image']) : '';
             $hp = isset($_POST['hp']) ? (int)$_POST['hp'] : 0;
+            $attack = isset($_POST['attack']) ? (int)$_POST['attack'] : 0;
 
-            // Validation des données
             if (empty($nom)) {
                 $errors[] = "Le nom du héros est requis.";
             }
@@ -33,32 +25,31 @@ class SecurityService {
                 $errors[] = "Les HP du héros doivent être un nombre positif.";
             }
 
-           
+            if ($attack <= 0) {
+                $errors[] = "L'attaque du héros doit être un nombre positif.";
+            }
+
+            // Vérifier si le nom existe déjà dans la base de données
+            $heroRepository = new HeroRepository();
+            if ($heroRepository->isNameTaken($nom)) {
+                $errors[] = "Un héros avec ce nom existe déjà.";
+            }
+
             if (!empty($errors)) {
                 foreach ($errors as $error) {
                     echo "<p style='color: red;'>$error</p>";
                 }
-                return; 
+                return;
             }
 
-           
-            // try {
-            //     $hero = new Hero(null, $nom, $image, $hp); // ID sera généré automatiquement lors de l'enregistrement
+            // Si pas d'erreurs, créer le héros
+            $hero = new Hero(null, $nom, $image);
+            $hero->setHp($hp);
+            $hero->setAttack($attack);
 
-            //     // Sauvegarder le héros dans la base de données
-            //     $heroRepository = new HeroRepository();
-            //     $heroRepository->save($nom, $image);
+            $heroRepository->create($hero);
 
-            //     // Redirection après la création réussie
-            //     header("Location: ../public/test.php");
-            //     exit();
-
-            // } catch (Exception $e) {
-            //     // En cas d'erreur lors de l'enregistrement, afficher un message d'erreur
-            //     echo "<p style='color: red;'>Erreur lors de la création du héros: " . $e->getMessage() . "</p>";
-            // }
+            echo "<p style='color: green;'>Héros créé avec succès !</p>";
         }
     }
 }
-
-?>

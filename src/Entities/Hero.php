@@ -3,12 +3,14 @@ class Hero extends Entite {
     protected $id;
     protected $image; 
     protected $attack; 
+    protected $niveau; 
 
-    public function __construct($id, $nom, $image,$attack,$hp) {
+    public function __construct($id, $nom, $image, $attack, $hp, $niveau) {
         parent::__construct($nom, $hp);
         $this->id = $id;
         $this->image = $image; 
         $this->attack = $attack;  
+        $this->niveau = $niveau;
     }
 
     public function __toString() {
@@ -17,59 +19,47 @@ class Hero extends Entite {
         <div class="hero">
             <h3><?= $this->getNom() ?></h3>
             <img src="<?= $this->getImage() ?>" alt="<?= $this->getNom() ?>" class="image"> 
-            <p>HP: <?= $this->gethp() ?></p>
+            <p>HP: <?= $this->getHp() ?></p>
         </div>
         <?php
         return ob_get_clean();
     }
 
-    
     public function getImage() {
         return $this->image;
     }
 
-    
     public function getId() {
         return $this->id;
     }
 
-    public function setId($id) {
-        $this->id = $id;
-    }
-
-    public function attaquer() {
-        echo $this->nom . " attaque avec une épée !";
-    }
-
-    public function getHp() {
+    public function getHp(): int {
         return $this->hp;
     }
 
-       
-        public function setImage($image)
-        {
-                $this->image = $image;
+    public function getAttack(): int {
+        return $this->attack;
+    }
 
-                return $this;
-        }
+    public function getNiveau(): int {
+        return $this->niveau;
+    }
 
-        /**
-         * Get the value of attack
-         */ 
-        public function getAttack()
-        {
-                return $this->attack;
-        }
+    public function setNiveau(int $niveau) {
+        $this->niveau = $niveau;
+    }
 
-        /**
-         * Set the value of attack
-         *
-         * @return  self
-         */ 
-        public function setAttack($attack)
-        {
-                $this->attack = $attack;
+    public function setHp($hp) {
+        $this->hp = $hp;
+    }
 
-                return $this;
-        }
+    public function monterNiveau() {
+        $this->niveau++;
+        $this->hp += 10;  // Augmenter les points de vie à chaque niveau
+        $this->attack += 5;  // Augmenter l'attaque à chaque niveau
+
+        // Mise à jour de la base de données
+        $heroRepo = new HeroRepository();
+        $heroRepo->updateHero($this);
+    }
 }

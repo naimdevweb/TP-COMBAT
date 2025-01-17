@@ -351,3 +351,198 @@ button:hover {
         transform: scale(1);
     }
 }
+
+.ready-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #ff007f, #ff4500);
+    padding: 10px 20px;
+    border-radius: 25px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.ready-link:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 69, 0, 0.6);
+}
+
+
+.battlefield {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 50px;
+    animation: backgroundFade 2s ease-out;
+}
+
+/* Styles pour chaque personnage (Héros et Monstre) */
+.character {
+    text-align: center;
+    width: 200px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    transition: transform 0.5s ease, box-shadow 0.3s ease;
+}
+
+.character:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.8);
+}
+
+/* Héros */
+.hero {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 3px solid #ff007f;
+    color: white;
+    position: relative;
+    animation: heroAnimation 2s ease-out;
+}
+
+/* Monstre */
+.monster {
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 3px solid #ff4500;
+    color: white;
+    position: relative;
+    animation: monsterAnimation 2s ease-out;
+}
+
+/* Style des images des personnages */
+.character img {
+    width: 150px;
+    height: 150px;
+    border-radius: 8px;
+    transition: transform 0.5s ease;
+}
+
+/* Animation pour l'image de l'attaque */
+@keyframes heroAttack {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Animation pour l'image du monstre lors de l'attaque */
+@keyframes monsterAttack {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Animation pour les barres de santé */
+@keyframes healthBarAnimation {
+    0% {
+        width: 100%;
+    }
+    100% {
+        width: 0%;
+    }
+}
+
+/* Effet de fond (lors du début du combat) */
+@keyframes backgroundFade {
+    0% {
+        background-color: #0a0a0a;
+    }
+    100% {
+        background-color: #2a2a2a;
+    }
+}
+
+/* Styles pour la barre de santé */
+.health-bar {
+    margin-top: 10px;
+    height: 10px;
+    background-color: #333;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.health {
+    height: 100%;
+    background-color: #00ff00;
+    animation: healthBarAnimation 1s ease-in-out;
+}
+
+/* Texte des PV */
+p {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+/* Animation de l'attaque */
+.attack-button {
+    background-color: #ff007f;
+    border: none;
+    padding: 15px 30px;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.attack-button:hover {
+    background-color: #ff4b6d;
+    transform: scale(1.1);
+}
+
+.attack-button:active {
+    transform: scale(0.95);
+}
+
+/* Animations supplémentaires pour l'attaque */
+@keyframes heroAttackAnim {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1);
+    }
+    75% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes monsterAttackAnim {
+    0% {
+        transform: scale(1);
+    }
+    25% {
+        transform: scale(1.1);
+    }
+    50% {
+        transform: scale(1);
+    }
+    75% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}

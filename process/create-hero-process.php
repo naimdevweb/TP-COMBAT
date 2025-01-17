@@ -6,7 +6,7 @@ $security = new SecurityService();
 
 
 if (!isset($_POST['nom'], $_POST['image'], $_POST['hp'], $_POST['attack'])) {
-    header("Location: ../public/creerHero.php?error=missing");
+    header("Location: ../public/home.php?error=missing");
     exit();
 }
 
@@ -17,11 +17,11 @@ $image = $_POST['image'];
 // Transform to int
 $heroHp = (int)$_POST['hp'];
 $heroAttack = (int)$_POST['attack'];
-
+$niveau = 1;
 
 $heroRepository = new HeroRepository();
 
-$hero = $heroRepository->save($nom, $image,$heroAttack,$heroHp);
+$hero = $heroRepository->save($nom, $image,$heroAttack,$heroHp,$niveau);
 
 session_start();
 

@@ -1,16 +1,15 @@
 <?php
 class HeroMapper {
-    public static function mapToObject(array $heroData): Hero {
-       
-        return new Hero(
-             $heroData["id"],
-             $heroData["img"],
-             $heroData["nom"],
-             $heroData["hp"],
-             $heroData["attack"]
 
-        );
-       
-    }
+public static function mapToObject(array $data): Hero {
+    $hero = new Hero(
+    ($data['id']),
+    ($data['nom']),
+    ($data['img']),
+    ($data['attack']),
+    ($data['hp']),
+    ($data['niveau'])
+    );
+    return $hero;
 }
-?>
+}
