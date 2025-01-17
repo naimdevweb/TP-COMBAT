@@ -10,6 +10,7 @@ class FightsManager {
     private $attackMonstre;
     private $niveauHero;
     private $niveauMonstre;
+    private $idHero;  // Ajout de la propriété pour l'ID du héros
 
     public function attributs() {
         if (isset($_SESSION['hero'])) {
@@ -21,6 +22,7 @@ class FightsManager {
                 $this->imgHero = $monHero->getImage();
                 $this->attackHero = $monHero->getAttack();
                 $this->niveauHero = $monHero->getNiveau();
+                $this->idHero = $monHero->getId();  // Récupération de l'ID du héros
             } else {
                 header('location: ./home.php');
                 exit();
@@ -63,6 +65,12 @@ class FightsManager {
                     <p>PV : <span id="hero-hp"><?= htmlspecialchars($this->hpHero) ?></span></p>
                     <p>Attaque : <span id="attack"><?= htmlspecialchars($this->attackHero) ?></span></p>
                     <p>Niveau : <span id="hero-level"><?= htmlspecialchars($this->niveauHero) ?></span></p>
+
+                    <!-- Ajout des ID et stats cachées -->
+                    <span id="hero-id" style="display:none;"><?= htmlspecialchars($this->idHero) ?></span> 
+                    <span id="hero-level" style="display:none;"><?= htmlspecialchars($this->niveauHero) ?></span>
+                    <span id="hero-hp" style="display:none;"><?= htmlspecialchars($this->hpHero) ?></span>
+                    <span id="hero-attack-hidden" style="display:none;"><?= htmlspecialchars($this->attackHero) ?></span>
                 </div>
 
                 <div>VS
@@ -85,6 +93,7 @@ class FightsManager {
             <!-- Zone de contrôle -->
             <div class="controls">
                 <button id="btn-hero" class="attack-button">Héros Attaque</button>
+                <button id="btn-restart" style="display: none;">Recommencer</button> 
             </div>
 
         </div>

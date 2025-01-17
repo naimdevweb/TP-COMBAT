@@ -1,65 +1,66 @@
 <?php
-class Hero extends Entite {
+class Hero {
     protected $id;
+    protected $nom;
     protected $image; 
     protected $attack; 
+    protected $hp; 
     protected $niveau; 
 
     public function __construct($id, $nom, $image, $attack, $hp, $niveau) {
-        parent::__construct($nom, $hp);
         $this->id = $id;
+        $this->nom = $nom;
         $this->image = $image; 
         $this->attack = $attack;  
+        $this->hp = $hp;
         $this->niveau = $niveau;
-    }
-
-    public function __toString() {
-        ob_start();
-        ?>
-        <div class="hero">
-            <h3><?= $this->getNom() ?></h3>
-            <img src="<?= $this->getImage() ?>" alt="<?= $this->getNom() ?>" class="image"> 
-            <p>HP: <?= $this->getHp() ?></p>
-        </div>
-        <?php
-        return ob_get_clean();
-    }
-
-    public function getImage() {
-        return $this->image;
     }
 
     public function getId() {
         return $this->id;
     }
 
-    public function getHp(): int {
+    public function getNom() {
+        return $this->nom;
+    }
+
+    public function getImage() {
+        return $this->image;
+    }
+
+    public function getHp() {
         return $this->hp;
     }
 
-    public function getAttack(): int {
+    public function getAttack() {
         return $this->attack;
     }
 
-    public function getNiveau(): int {
+    public function getNiveau() {
         return $this->niveau;
     }
 
-    public function setNiveau(int $niveau) {
-        $this->niveau = $niveau;
+    public function setAttack($attack) {
+        $this->attack = $attack;
     }
 
     public function setHp($hp) {
         $this->hp = $hp;
     }
 
-    public function monterNiveau() {
-        $this->niveau++;
-        $this->hp += 10;  // Augmenter les points de vie à chaque niveau
-        $this->attack += 5;  // Augmenter l'attaque à chaque niveau
+    public function setNiveau($niveau) {
+        $this->niveau = $niveau;
+    }
 
-        // Mise à jour de la base de données
+    public function saveHero(Hero $hero) {
         $heroRepo = new HeroRepository();
-        $heroRepo->updateHero($this);
+        if ($this->id) {
+            // Si le héros a déjà un ID, on le met à jour
+            $heroRepo->updateHero($this);
+        } else {
+            // Si c'est un nouveau héros, on l'insère
+            $heroRepo->save($this->nom, $this->image, $this->attack, $this->hp, $this->niveau);
+        }
     }
 }
+?>
