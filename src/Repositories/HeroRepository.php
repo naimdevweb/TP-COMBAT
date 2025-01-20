@@ -4,10 +4,10 @@ class HeroRepository {
     private PDO $db;
 
     public function __construct() {
-        $this->db = Database::getInstance(); // Connexion à la base de données
+        $this->db = Database::getInstance(); 
     }
 
-    // Méthode pour récupérer un héros par son ID
+    
     public function findHero(int $id): ?Hero {
         $stmt = $this->db->prepare("SELECT * FROM hero WHERE id = :id");
         $stmt->bindParam(":id", $id, PDO::PARAM_INT);
@@ -18,11 +18,11 @@ class HeroRepository {
             return null;
         }
 
-        // Mapper les données de la base vers un objet Hero
+        
         return HeroMapper::mapToObject($data);
     }
 
-    // Méthode pour sauvegarder un nouveau héros dans la base de données
+    
     public function save(string $heroName, string $heroImg, int $heroAttack, int $heroHp, int $heroNiveau): Hero {
         $stmt = $this->db->prepare("INSERT INTO hero (nom, img, attack, hp, niveau) VALUES (:nom, :img, :attack, :hp, :niveau)");
         
@@ -34,23 +34,58 @@ class HeroRepository {
 
         $stmt->execute();
 
-        // Récupérer l'ID du dernier héros inséré
+        
         $id = $this->db->lastInsertId();
 
-        // Retourner le héros inséré
+        
         return $this->findHero($id);
     }
 
-    // Méthode pour mettre à jour les informations d'un héros dans la base de données
+    
     public function updateHero(Hero $hero): void {
+
+        $attack = $hero->getAttack();
+        $niveau = $hero->getNiveau();
+        $hp = $hero->getHp();
+        $id = $hero->getId();
+
         $stmt = $this->db->prepare("UPDATE hero SET attack = :attack, hp = :hp, niveau = :niveau WHERE id = :id");
 
-        $stmt->bindParam(":attack", $hero->getAttack(), PDO::PARAM_INT);
-        $stmt->bindParam(":hp", $hero->getHp(), PDO::PARAM_INT);
-        $stmt->bindParam(":niveau", $hero->getNiveau(), PDO::PARAM_INT);
-        $stmt->bindParam(":id", $hero->getId(), PDO::PARAM_INT);
+        $stmt->bindParam(":attack", $attack, PDO::PARAM_INT);
+        $stmt->bindParam(":hp", $hp, PDO::PARAM_INT);
+        $stmt->bindParam(":niveau", $niveau, PDO::PARAM_INT);
+        $stmt->bindParam(":id", $id, PDO::PARAM_INT);
         
         $stmt->execute();
     }
+
+
+    public function deleteHeroById($heroId) {
+        $stmt = $this->db->prepare("DELETE FROM hero WHERE id = :id");
+        $stmt->bindParam(":id", $heroId, PDO::PARAM_INT);
+        $stmt->execute();
+    }
+
+
+    public function getAllHeroes(): array {
+        $stmt = $this->db->prepare("SELECT * FROM hero");  
+        $stmt->execute();
+        
+        $heroes = $stmt->fetchAll(PDO::FETCH_ASSOC);  
+    
+        $heroObjects = [];
+        foreach ($heroes as $heroData) {
+            $heroObjects[] = new Hero(
+                $heroData['id'],
+                $heroData['nom'],
+                $heroData['img'],
+                $heroData['attack'],
+                $heroData['hp'],
+                $heroData['niveau']
+            ); 
+        }
+        return $heroObjects; 
+    }
+    
 }
 ?>

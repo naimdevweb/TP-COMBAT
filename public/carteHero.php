@@ -11,9 +11,9 @@ if (isset($_SESSION['hero'])) {
    
     if ($monHero instanceof Hero) {
        
-        $nom = $monHero->getImage();
+        $nom = $monHero->getNom();
         $hp = $monHero->getHp();
-        $img = $monHero->getNom(); 
+        $img = $monHero->getImage(); 
         $id = $monHero->getId();
         $attack = $monHero->getAttack();
     } else {
@@ -34,14 +34,13 @@ if (isset($_SESSION['hero'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Afficher le Héros</title>
-    <!-- Lier le fichier CSS externe -->
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
 
 <div class="hero-card">
    
-    <img src="./assets/image/<?= $img ?>" alt="image du hero">
+    <img src="./assets/image/<?= htmlspecialchars($img) ?>" alt="<?= htmlspecialchars($img) ?>" >
 
     
     <div class="hero-name"><?= htmlspecialchars($nom) ?></div>

@@ -8,14 +8,17 @@ class Monstre extends Entite {
     public function __construct($niveauHero) {
         $this->niveauMonstre = $niveauHero;
 
-        // Définir le monstre aléatoirement
+        
         $numero = random_int(0, 4);
         $this->nom = $this->genererNomAleatoire($numero);
         $this->image = $this->genererImageAleatoire($numero);
 
-        // Ajuster les caractéristiques en fonction du niveau du héros
-        $this->hp = rand(100 + $this->niveauMonstre * 10, 500 + $this->niveauMonstre * 20);
-        $this->attack = rand(20 + $this->niveauMonstre * 2, 100 + $this->niveauMonstre * 5);
+        
+        $difficultyFactor = $this->niveauMonstre / 10; 
+
+       
+        $this->hp = round(rand(100 + ($this->niveauMonstre * 10), 300 + ($this->niveauMonstre * 20)) * $difficultyFactor);
+        $this->attack = round(rand(20 + ($this->niveauMonstre * 5), 400 + ($this->niveauMonstre * 5)) * $difficultyFactor);
     }
 
     private function genererNomAleatoire($numero) {

@@ -15,12 +15,12 @@ $securityService->securite();
     
 
 
-    <form action="../process/create-hero-process.php" method="POST">
+    <form action="../process/create-hero-process.php" method="POST" enctype="multipart/form-data">
         <label for="nom">Nom du héros:</label>
         <input type="text" id="nom" name="nom" required><br><br>
 
         <label for="image">Image du héros :</label>
-        <input type="file" id="image" name="image" accept="image/*" required><br><br>
+        <input type="file" id="image" name="image"   required><br><br>
 
         <label for="hp">HP du héros:</label>
         <input type="number" id="hp" name="hp" required><br><br>
@@ -29,7 +29,7 @@ $securityService->securite();
         <input type="number" id="attack" name="attack" required><br><br>
 
         <button type="submit">Créer le héros</button>
-        <a href="./list-heroes.php">Voir tous les héros</a>
+        <a href="./listehero.php">Voir tous les héros</a>
     </form>
 </main>
 

@@ -1,11 +1,11 @@
 <?php
 class Hero {
-    protected $id;
-    protected $nom;
-    protected $image; 
-    protected $attack; 
-    protected $hp; 
-    protected $niveau; 
+    protected int $id;
+    protected string $nom;
+    protected string $image; 
+    protected int $attack; 
+    protected int $hp; 
+    protected int $niveau; 
 
     public function __construct($id, $nom, $image, $attack, $hp, $niveau) {
         $this->id = $id;
@@ -16,27 +16,27 @@ class Hero {
         $this->niveau = $niveau;
     }
 
-    public function getId() {
+    public function getId(): int {
         return $this->id;
     }
 
-    public function getNom() {
+    public function getNom(): string {
         return $this->nom;
     }
 
-    public function getImage() {
+    public function getImage(): string {
         return $this->image;
     }
 
-    public function getHp() {
+    public function getHp(): int {
         return $this->hp;
     }
 
-    public function getAttack() {
+    public function getAttack(): int {
         return $this->attack;
     }
 
-    public function getNiveau() {
+    public function getNiveau(): int {
         return $this->niveau;
     }
 
@@ -52,15 +52,6 @@ class Hero {
         $this->niveau = $niveau;
     }
 
-    public function saveHero(Hero $hero) {
-        $heroRepo = new HeroRepository();
-        if ($this->id) {
-            // Si le héros a déjà un ID, on le met à jour
-            $heroRepo->updateHero($this);
-        } else {
-            // Si c'est un nouveau héros, on l'insère
-            $heroRepo->save($this->nom, $this->image, $this->attack, $this->hp, $this->niveau);
-        }
-    }
+  
 }
 ?>
