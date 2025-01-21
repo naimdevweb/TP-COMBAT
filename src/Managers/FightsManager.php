@@ -54,14 +54,14 @@ class FightsManager {
             <link rel="stylesheet" href="./assets/css/style.css">
             <script src="./assets/script/script.js" defer></script>
         </head>
-        <body>
+        <body class="bodycombat">
         
         <div class="game-container">
             <div class="battlefield">
                 <!-- Héros -->
                 <div class="character hero">
                     <h2><?= htmlspecialchars($this->nomHero) ?></h2>
-                    <img src="./assets/image/<?= htmlspecialchars($this->imgHero) ?>" alt="" class="image">
+                    <img src="./assets/image/<?= htmlspecialchars($this->imgHero) ?>" alt="" class="image hero">
                     <div class="health-bar">
                         <div class="health" id="hero-health" style="width: <?= $this->hpHero ?>%;"></div>
                     </div>
@@ -78,7 +78,7 @@ class FightsManager {
                 <!-- Monstre -->
                 <div class="character monster">
                     <h2><?= htmlspecialchars($this->nomMonstre) ?></h2>
-                    <img src="<?= htmlspecialchars($this->imgMonstre) ?>" alt="<?= htmlspecialchars($this->nomMonstre) ?>" class="image">
+                    <img src="<?= htmlspecialchars($this->imgMonstre) ?>" alt="<?= htmlspecialchars($this->nomMonstre) ?>" class="image monster">
                     <div class="health-bar">
                         <div class="health" id="monster-health" style="width: <?= $this->hpMonstre ?>%;"></div>
                     </div>
@@ -87,22 +87,26 @@ class FightsManager {
                     <p>Niveau : <span id="monster-level"><?= htmlspecialchars($this->niveauMonstre) ?></span></p>
                 </div>
             </div>
+            
 
-            <!-- Zone de contrôle -->
+            
             <div class="controls">
-    <button id="btn-hero" class="attack-button">Héros Attaque</button>
+    <button class="attack" id="btn-hero" class="attack-button">Héros Attaque</button>
     <button id="btn-restart" style="display: none;" onclick="restartGame()">Recommencer</button>
     <button id="btn-quit" style="display: none;" onclick="quitGame()">Quitter</button> 
+    <button id="btn-restaure" style="display: none;" >Restaurer</button> 
 </div>
 
 
        
-        <form id="update-stats-form" action="../process/process_fight.php" method="POST" style="display: none;">
-            <input type="hidden" name="heroId" value="<?= $this->idHero ?>" id="hero-id">
-            <input type="hidden" name="newLevel" value="<?= $this->niveauHero + 1 ?>" id="new-level">
-            <input type="hidden" name="newHp" value="<?= $this->hpHero + 20 ?>" id="new-hp">
-            <input type="hidden" name="newAttack" value="<?= $this->attackHero + 5 ?>" id="new-attack">
-        </form>
+<form id="update-stats-form" action="../process/process_fight.php" method="POST" style="display: none;">
+    <input type="hidden" name="heroId" value="<?= $this->idHero  ?>" id="hero-id">
+    <input type="hidden" name="newLevel" value="<?= $this->niveauHero + 1 ?>" id="new-level">
+    <input type="hidden" name="newHp" value="<?= $this->hpHero + 20 ?>" id="new-hp">
+    <input type="hidden" name="newAttack" value="<?= $this->attackHero + 5 ?>" id="new-attack">
+</form>
+
+        </div>
 
         </body>
         </html>

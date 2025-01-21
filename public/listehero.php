@@ -4,7 +4,10 @@ require_once '../utils/autoload.php';
 $heroRepository = new HeroRepository();  
 $heroes = $heroRepository->getAllHeroes();
 
-
+if (!$heroes) {
+    header("Location: ./home.php");
+    exit;
+}
 
 
 ?>
@@ -16,9 +19,9 @@ $heroes = $heroRepository->getAllHeroes();
     <title>Liste des Héros</title>
     <link rel="stylesheet" href="./assets/css/style.css"> 
 </head>
-<body>
+<body class="bodyhero">
 
-    <h1>Liste des Héros</h1>
+    <h1 class="heroes">Liste des Héros</h1>
 
     <div class="heroes-container">
         <?php foreach ($heroes as $hero): ?>
@@ -28,6 +31,8 @@ $heroes = $heroRepository->getAllHeroes();
                 <p><strong>Attaque:</strong> <?php echo $hero->getAttack(); ?></p>
                 <p><strong>Points de vie:</strong> <?php echo $hero->getHp(); ?></p>
                 <p><strong>Niveau:</strong> <?php echo $hero->getNiveau(); ?></p>
+                <a class="choisir" href="../public/fight.php?id=<?= $hero->getId(); ?>">Choisir</a>
+
             </div>
         <?php endforeach; ?>
     </div>

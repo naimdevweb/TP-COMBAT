@@ -27,6 +27,12 @@ spl_autoload_register(function ($className) {
         default:
             $directory = 'Entities';
             break;
+            case substr($className, -9) === 'Validator':
+                $directory = 'Services/Validators';
+                break;
+                case substr($className, -5) === 'Trait':
+                    $directory = 'Traits';
+                    break;
     }
 
     // Construire le chemin complet du fichier

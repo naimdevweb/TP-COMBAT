@@ -14,6 +14,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     overflow-x: hidden;
+    
 }
 
 /* === HEADER === */
@@ -35,7 +36,7 @@ header h1 {
     text-shadow: 0 0 10px #ffffff, 0 0 20px #ff007f, 0 0 30px #ff007f;
     animation: neon-pulse 1.5s infinite alternate;
 }
-.footer{
+footer{
     background: linear-gradient(90deg, #ff7a18, #e52e71, #9a30a3);
     padding: 20px 0;
     text-align: center;
@@ -68,15 +69,50 @@ header h1 {
     border-radius: 50%;
     margin-bottom: 15px;
 }
+.heroes{
+    text-align: center;
+    margin-top: 20px;
+}
+.choisir {
+    background-color: #ff007f; 
+    border: none; 
+    padding: 10px 20px;
+    color: white; 
+    font-size: 1.2rem; 
+    font-weight: bold; 
+    text-decoration: none; 
+    text-align: center; 
+    border-radius: 8px;
+    margin-top: 20px;
+    cursor: pointer; 
+    display: inline-block; 
+    transition: background-color 0.3s ease, transform 0.3s ease; 
+}
+
+.choisir:hover {
+    background-color: #e60072;
+    transform: scale(1.05); 
+}
+
+.choisir:active {
+    background-color: #cc005f; 
+    transform: scale(0.95);
+}
+
+.choisir:focus {
+    outline: 2px solid #ff4da6; 
+    outline-offset: 2px;
+}
 
 .hero-card h2 {
+    
     font-size: 20px;
-    color: #333;
+    color: #fbf5f5;
 }
 
 .hero-card p {
     font-size: 16px;
-    color: #555;
+    color: #f5f5f5;
 }
 @keyframes slideIn {
     from {
@@ -137,7 +173,7 @@ main {
 
 main h2 {
     font-size: 2.5rem;
-    color: #ffbf00;
+    color: #f9cc43;
     text-transform: uppercase;
     margin-bottom: 20px;
     animation: glow 1.5s infinite alternate;
@@ -153,9 +189,10 @@ main h2 {
 }
 
 main p {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     margin-bottom: 40px;
-    color: #eaeaea;
+    text-transform: uppercase;
+    color: red;
     animation: bounceIn 1s ease-out;
 }
 
@@ -219,30 +256,42 @@ main form input:focus {
     outline: none;
 }
 
-main form button {
-    display: inline-block;
-    width: 100%;
-    padding: 10px 20px;
+/* Normalisation de la taille et de l'espacement des boutons */
+main form button, .voirhero {
+    display: block;
+    text-decoration: none;
+    width: 100%; 
+    padding: 10px 8px; 
     background: linear-gradient(90deg, #ff007f, #ff4500);
     border: none;
     color: #ffffff;
-    margin-bottom: 20px;
+    margin-bottom: 20px; 
     font-size: 1.2rem;
     font-weight: bold;
     border-radius: 25px;
     cursor: pointer;
     transition: transform 0.3s, box-shadow 0.3s;
     animation: buttonPop 1.2s infinite ease-in-out;
+    box-sizing: border-box; /* Important pour que le padding et la largeur totale soient pris en compte correctement */
 }
 
+/* Animation de pop pour les boutons */
 @keyframes buttonPop {
     0%, 100% {
         transform: scale(1);
     }
     50% {
-        transform: scale(1.1);
+        transform: scale(1.05);
     }
 }
+
+/* Assurez-vous que le texte est bien centré et a la même taille dans les deux boutons */
+main form button, .voirhero {
+    text-align: center; /* Centrer le texte */
+    line-height: 1.5; /* S'assurer que la hauteur de ligne est la même */
+}
+
+
 
 main form button:hover {
     transform: translateY(-5px);
@@ -310,25 +359,29 @@ main form button:hover {
     transform: scale(1.1);
     box-shadow: 0 5px 15px rgba(255, 69, 0, 0.6);
 }
-
-
-.game-container {
-    width: 90%;
-    max-width: 1200px;
-    text-align: center;
+.bodycombat{
+    background-image: url('../image/decors-jeu-combat-118.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+   
+}
+.bodyhero{
+    background-image: url('../image/decors-jeu-combat-099.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+}
+.homebody{
+    background-image: url('../image/decors-jeu-combat-070.gif');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
-.battlefield {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 30px 0;
-    background: url('./assets/images/battlefield.jpg') no-repeat center center/cover;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
-    height: 400px;
-}
+
+
+
 
 .character {
     width: 45%;
@@ -418,9 +471,10 @@ button:hover {
     align-items: center;
     margin-top: 50px;
     animation: backgroundFade 2s ease-out;
+    
 }
 
-/* Styles pour chaque personnage (Héros et Monstre) */
+/* Style général des personnages */
 .character {
     text-align: center;
     width: 200px;
@@ -441,7 +495,7 @@ button:hover {
     border: 3px solid #ff007f;
     color: white;
     position: relative;
-    animation: heroAnimation 2s ease-out;
+    animation: heroIdle 1s infinite alternate;
 }
 
 /* Monstre */
@@ -450,7 +504,7 @@ button:hover {
     border: 3px solid #ff4500;
     color: white;
     position: relative;
-    animation: monsterAnimation 2s ease-out;
+    animation: monsterIdle 1s infinite alternate;
 }
 
 /* Style des images des personnages */
@@ -461,31 +515,83 @@ button:hover {
     transition: transform 0.5s ease;
 }
 
-/* Animation pour l'image de l'attaque */
-@keyframes heroAttack {
+/* Animation Idle (mouvement léger) */
+@keyframes heroIdle {
     0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
+        transform: translateY(0);
     }
     100% {
-        transform: scale(1);
+        transform: translateY(-5px);
     }
 }
 
-/* Animation pour l'image du monstre lors de l'attaque */
-@keyframes monsterAttack {
+@keyframes monsterIdle {
     0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
+        transform: translateY(0);
     }
     100% {
-        transform: scale(1);
+        transform: translateY(-5px);
     }
 }
+
+/* Animation d'attaque du héros */
+@keyframes heroAttack {
+    0% {
+        transform: translateX(0) scale(1);
+    }
+    30% {
+        transform: translateX(-20px) scale(1.1);
+    }
+    50% {
+        transform: translateX(30px) scale(1.2);
+    }
+    100% {
+        transform: translateX(0) scale(1);
+    }
+}
+
+/* Animation d'attaque du monstre */
+@keyframes monsterAttack {
+    0% {
+        transform: translateX(0) scale(1);
+    }
+    30% {
+        transform: translateX(20px) scale(1.1);
+    }
+    50% {
+        transform: translateX(-30px) scale(1.2);
+    }
+    100% {
+        transform: translateX(0) scale(1);
+    }
+}
+
+/* Animation de secousse lors de l'impact */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-10px);
+    }
+    50% {
+        transform: translateX(10px);
+    }
+    75% {
+        transform: translateX(-10px);
+    }
+}
+
+/* Ajouter une classe pour déclencher l'attaque */
+.hero.attacking img {
+    animation: heroAttack 0.5s ease-in-out, shake 0.5s ease-in-out;
+}
+
+.monster.attacking img {
+    animation: monsterAttack 0.5s ease-in-out, shake 0.5s ease-in-out;
+}
+
+
 
 /* Animation pour les barres de santé */
 @keyframes healthBarAnimation {
@@ -497,15 +603,7 @@ button:hover {
     }
 }
 
-/* Effet de fond (lors du début du combat) */
-@keyframes backgroundFade {
-    0% {
-        background-color: #0a0a0a;
-    }
-    100% {
-        background-color: #2a2a2a;
-    }
-}
+
 
 /* Styles pour la barre de santé */
 .health-bar {
@@ -530,6 +628,12 @@ p {
 }
 
 /* Animation de l'attaque */
+.controls {
+    display: flex;
+    justify-content: center; /* Centre horizontalement */
+    align-items: center;     /* Centre verticalement (si nécessaire) */
+}
+
 .attack-button {
     background-color: #ff007f;
     border: none;
@@ -542,6 +646,7 @@ p {
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.3s ease;
 }
+
 
 .attack-button:hover {
     background-color: #ff4b6d;

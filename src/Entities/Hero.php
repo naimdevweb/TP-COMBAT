@@ -7,10 +7,11 @@ class Hero {
     protected int $hp; 
     protected int $niveau; 
 
-    public function __construct($id, $nom, $image, $attack, $hp, $niveau) {
+    
+    public function __construct($id, $nom, $image, $attack = 20, $hp = 100, $niveau = 1) {
         $this->id = $id;
         $this->nom = $nom;
-        $this->image = $image; 
+        $this->image = $image;
         $this->attack = $attack;  
         $this->hp = $hp;
         $this->niveau = $niveau;
@@ -51,7 +52,4 @@ class Hero {
     public function setNiveau($niveau) {
         $this->niveau = $niveau;
     }
-
-  
 }
-?>

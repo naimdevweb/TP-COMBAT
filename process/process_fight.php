@@ -1,55 +1,42 @@
 <?php
+
 require_once '../utils/autoload.php';
 session_start();
 
 if (isset($_SESSION['hero'])) {
-    
     $monHero = $_SESSION['hero'];
-    var_dump($monHero); 
+    
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $heroId = $_POST['heroId'];
+        $newLevel = $_POST['newLevel'];
+        $newHp = $_POST['newHp'];
+        $newAttack = $_POST['newAttack'];
 
-   
-    if ($monHero instanceof Hero) {
-       
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      
+        if ($monHero->getId() == $heroId) {
+           
+            $monHero->setNiveau($newLevel);
+            $monHero->setHp($newHp);
+            $monHero->setAttack($newAttack);
+
           
-            $heroId = $_POST['heroId'];
-            $newLevel = $_POST['newLevel'];
-            $newHp = $_POST['newHp'];
-            $newAttack = $_POST['newAttack'];
+    
+            $heroRepository = new HeroRepository();
+            $heroRepository->updateHero($monHero);
 
-        
-            if ($monHero->getId() == $heroId) {
-               
-                $monHero->setNiveau($newLevel);
-                $monHero->setHp($newHp);
-                $monHero->setAttack($newAttack);
+            $_SESSION['hero'] = $monHero;
 
-                $heroRepository = new HeroRepository();  
-
-             
-                $heroRepository->updateHero($monHero);
-                
-                $_SESSION['hero'] = $monHero;
-               
-
-              
-
-              
-                header('Location: ../public/fight.php');  
-                exit();
-            } else {
-              
-                header('Location: ../home.php');
-                exit();
-            }
+          
+            header('Location: ../public/fight.php?id=' . $heroId);
+            exit();
+        } else {
+          
+            header('Location: ../home.php?error=wrongHeroId');
+            exit();
         }
-    } else {
-        
-        header('Location: ../home.php');
-        exit();
     }
 } else {
-  
-    header('Location: ./home.php?error=1');
+   
+    header('Location: ../home.php?error=noHeroInSession');
     exit();
 }

@@ -4,6 +4,7 @@ session_start();
 
 $heroRepository = new HeroRepository();
 
+
 // Vérifier si le héros est présent dans la session
 if (isset($_SESSION['hero'])) {
     $monHero = $_SESSION['hero'];
@@ -58,7 +59,8 @@ if (isset($_SESSION['hero'])) {
    </div>
 
    
-    <a href="./fight.php" class="ready-link" onclick="alert('<?= htmlspecialchars($nom) ?> est prêt à combattre !')">Prêt à combattre</a>
+   <a href="./fight.php?id=<?= htmlspecialchars($id) ?>" class="ready-link" onclick="alert('<?= htmlspecialchars($nom) ?> est prêt à combattre !')">Prêt à combattre</a>
+
 
 
    

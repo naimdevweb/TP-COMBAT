@@ -4,12 +4,15 @@ include '../public/components/header.php';
 require_once '../utils/autoload.php';
 
 session_start();
-$securityService = new SecurityService();
-$securityService->securite();
+
+
 
 ?>
 
 <main>
+    <body class="homebody">
+        
+    
     <h2>Bienvenue dans Combat</h2>
     <p>Préparez-vous à l'affrontement ultime entre héros légendaires.</p>
     
@@ -22,16 +25,13 @@ $securityService->securite();
         <label for="image">Image du héros :</label>
         <input type="file" id="image" name="image"   required><br><br>
 
-        <label for="hp">HP du héros:</label>
-        <input type="number" id="hp" name="hp" required><br><br>
-
-        <label for="attack">Attaque du héros:</label>
-        <input type="number" id="attack" name="attack" required><br><br>
+       
 
         <button type="submit">Créer le héros</button>
-        <a href="./listehero.php">Voir tous les héros</a>
+        <a class="voirhero" href="./listehero.php">Voir tous les héros</a>
     </form>
 </main>
+</body>
 
 <?php
 include '../public/components/footer.php';

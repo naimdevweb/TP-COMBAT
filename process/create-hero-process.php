@@ -1,49 +1,62 @@
 <?php
 require_once '../utils/autoload.php';
 
-
 $security = new SecurityService();
 
 
-if (!isset($_POST['nom'], $_FILES['image'], $_POST['hp'], $_POST['attack'])) {
+
+if (!$heroes) {
+    header("Location: ./home.php");
+    exit;
+}
+
+if (!isset($_POST['nom'], $_FILES['image'])) {
     header("Location: ../public/home.php?error=missing");
     exit();
 }
+
 $file = $_FILES["image"];
 
-    $uploadDir = '../public/assets/image/';
 
-    $fileName = uniqid() . basename($file['name']);
-
-    $uploadPath = $uploadDir . $fileName;
+$allowedExtensions = ['jpg', 'jpeg', 'png', 'gif']; 
+$fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
 
-    move_uploaded_file($file['tmp_name'], $uploadPath);
+if (!in_array($fileExtension, $allowedExtensions)) {
+    header("Location: ../public/home.php?error=invalid_file");
+    exit();
+}
 
-    // On récupère le filename et on le met l'array final
-    $sanitizedPOST["filename"] = $fileName;
-// A refaire le ssang
-// $security->securite($_POST['nom'], $_POST['image'], $_POST['hp'], $_POST['attack']);
-$nom = $_POST['nom'];
-$image = $fileName;
-// Transform to int
-$heroHp = (int)$_POST['hp'];
-$heroAttack = (int)$_POST['attack'];
-$niveau = 1;
+
+$uploadDir = '../public/assets/image/';
+$fileName = uniqid() . '.' . $fileExtension;
+$uploadPath = $uploadDir . $fileName;
+
+
+if (!move_uploaded_file($file['tmp_name'], $uploadPath)) {
+    header("Location: ../public/home.php?error=upload_failed");
+    exit();
+}
+
+
+$sanitizedPOST["filename"] = $fileName;
+
+
+$nom = htmlspecialchars($_POST['nom']);  
+$image = $fileName;  
+$heroHp = isset($_POST['hp']) ? (int)$_POST['hp'] : 100;  
+$heroAttack = isset($_POST['attack']) ? (int)$_POST['attack'] : 20;  
+$niveau = 1;  
+
 
 $heroRepository = new HeroRepository();
+$hero = $heroRepository->save($nom, $image, $heroAttack, $heroHp, $niveau);
 
-$hero = $heroRepository->save($nom, $image,$heroAttack,$heroHp,$niveau);
 
 session_start();
-
 $_SESSION['hero'] = $hero;
 
 
-
-
- // Redirection après la création réussie
-               header("Location: ../public/carteHero.php");
-                exit();
-
+header("Location: ../public/carteHero.php");
+exit();
 ?>
