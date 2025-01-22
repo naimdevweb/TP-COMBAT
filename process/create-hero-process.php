@@ -39,9 +39,11 @@ if (isset($_FILES['image']) && $_FILES['image']['error'] === UPLOAD_ERR_OK) {
     $fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
     if (!in_array($fileExtension, $allowedExtensions)) {
-        header('location: ../public/home.php?error=invalid_image');
+        $errorMessage = urlencode("Veuillez choisir une image valide.");
+        header("Location: ../public/home.php?error=invalid_image");
         exit();
     }
+    
 
     // Téléchargement du fichier
     $uploadDir = '../public/assets/image/';

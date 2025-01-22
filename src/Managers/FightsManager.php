@@ -33,6 +33,7 @@ class FightsManager {
             header('location: ./home.php');
             exit();
         }
+        
 
         // Générer un monstre en fonction du niveau du héros
         $monstre = new Monstre($this->niveauHero);
@@ -56,12 +57,13 @@ class FightsManager {
             <script src="./assets/script/script.js" defer></script>
         </head>
         <body class="bodycombat">
+        <audio id="backgroundMusic" src="../../public/assets/epic-music-fight-battle-airforce-navy-combat-background-intro-theme-259695.mp3"></audio>
         
         <div class="game-container">
             <div class="battlefield">
                 <!-- Héros -->
                 <div class="character hero">
-                <audio id="attack-sound" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1159990/clap.wav"></audio>
+                <audio id="attack-sound" src="../../public/assets/coup_ventre.mp3"></audio>
                     <h2><?= htmlspecialchars($this->nomHero) ?></h2>
                     <img src="./assets/image/<?= htmlspecialchars($this->imgHero) ?>" alt="" class="image hero">
                     <div class="health-bar">

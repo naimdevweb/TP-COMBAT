@@ -14,8 +14,7 @@
     <h1>Combat</h1>
     <nav>
         <a href="#home">Accueil</a>
-        <a href="#heroes">Héros</a>
-        <a href="#about">À propos</a>
-        <a href="#contact">Contact</a>
+        <a href="./listehero.php">Héros</a>
+      
     </nav>
 </header>

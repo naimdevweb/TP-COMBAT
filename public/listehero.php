@@ -5,7 +5,8 @@ $heroRepository = new HeroRepository();
 $heroes = $heroRepository->getAllHeroes();
 
 if (!$heroes) {
-    header("Location: ./home.php");
+    $error = urlencode("Vous n'avez créé aucun héros.");
+    header("Location: ./home.php?nohero=$error");
     exit;
 }
 

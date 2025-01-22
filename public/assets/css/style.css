@@ -694,3 +694,78 @@ p {
     }
 }
 
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 2rem;
+    }
+
+    nav a {
+        font-size: 0.9rem;
+        margin: 0 5px;
+    }
+
+    .heroes-container {
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    }
+
+    .hero-card img {
+        width: 80px;
+        height: 80px;
+    }
+
+    main h2 {
+        font-size: 1.8rem;
+    }
+
+    main p {
+        font-size: 1rem;
+    }
+}
+
+/* Smartphones */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+    }
+
+    nav a {
+        font-size: 0.8rem;
+    }
+
+    .heroes-container {
+        gap: 15px;
+    }
+
+    .hero-card {
+        padding: 10px;
+    }
+
+    .hero-card img {
+        width: 70px;
+        height: 70px;
+    }
+
+    main h2 {
+        font-size: 1.5rem;
+    }
+
+    main p {
+        font-size: 0.9rem;
+    }
+}
+
+
+
+    .error-message {
+        color: red;
+        font-size: 16px;
+        font-weight: bold;
+        margin: 15px 0;
+        padding: 10px;
+        border: 1px solid red;
+        background-color: #ffe6e6;
+        border-radius: 5px;
+    }
+
