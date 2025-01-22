@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const monsterHealthBar = document.querySelector('#monster-health');
     const attackMessages = document.querySelector('#attack-messages');
     const updateStatsForm = document.querySelector('#update-stats-form'); 
+    const attackSound = new Audio('https://s3-us-west-2.amazonaws.com/s.cdpn.io/1159990/clap.wav');
 
     // Récupérer l'ID du héros depuis l'élément caché
     const heroId = document.querySelector('#hero-id').value;
@@ -25,48 +26,69 @@ document.addEventListener('DOMContentLoaded', () => {
         healthBar.style.width = `${(currentHp / maxHp) * 100}%`;
     }
 
-    // Action de l'attaque du héros
-    function heroAttackAction() {
-        if (monsterHp <= 0) {
-            attackMessages.innerHTML = "<p>Le monstre est déjà vaincu !</p>";
-            return;
-        }
-    
-        // Ajouter la classe d'attaque du héros
-        const hero = document.querySelector('.hero');
-        const monster = document.querySelector('.monster');
-        hero.classList.add('attacking');
-    
-      
-        attackMessages.innerHTML = `<p>Le héros attaque et inflige ${heroAttack} dégâts !</p>`;
-        monsterHp -= heroAttack;
-    
-        if (monsterHp <= 0) {
-            monsterHp = 0;
-            attackMessages.innerHTML += "<p>Le monstre est vaincu !</p>";
-            alert("Le monstre est vaincu !");
-            updateStatsForm.submit();
-        }
-    
-        monsterHpElement.textContent = monsterHp;
-        updateHealthBar(monsterHealthBar, monsterHp, maxMonsterHp);
-    
-       
-        monster.classList.add('shaking');
-    
-        
-        setTimeout(() => {
-            hero.classList.remove('attacking');
-            monster.classList.remove('shaking');
-        }, 500); 
-    
-        
-        if (monsterHp > 0) {
-            setTimeout(() => {
-                monsterAttackAction();
-            }, 1000); 
-        }
+   
+
+
+// Fonction pour gérer l'attaque du héros
+function heroAttackAction() {
+    if (monsterHp <= 0) {
+        attackMessages.innerHTML = "<p>Le monstre est déjà vaincu !</p>";
+        return;
     }
+
+    // Ajouter la classe d'attaque du héros
+    const hero = document.querySelector('.hero');
+    const monster = document.querySelector('.monster');
+    hero.classList.add('attacking');
+
+    // Jouer le son de l'attaque
+    attackSound.currentTime = 0; 
+    attackSound.play();
+
+    attackMessages.innerHTML = `<p>Le héros attaque et inflige ${heroAttack} dégâts !</p>`;
+    monsterHp -= heroAttack;
+
+    if (monsterHp <= 0) {
+        monsterHp = 0;
+        attackMessages.innerHTML += "<p>Le monstre est vaincu !</p>";
+        alert("Le monstre est vaincu !");
+        updateStatsForm.submit();
+    }
+
+    monsterHpElement.textContent = monsterHp;
+    updateHealthBar(monsterHealthBar, monsterHp, maxMonsterHp);
+
+    // Ajouter des animations
+    monster.classList.add('shaking');
+
+    
+    setTimeout(() => {
+        hero.classList.remove('attacking');
+        monster.classList.remove('shaking');
+    }, 500);
+
+    
+    if (monsterHp > 0) {
+        setTimeout(() => {
+            monsterAttackAction();
+        }, 1000);
+    }
+}
+
+// Ajouter l'événement pour le clic sur un bouton ou la touche "Espace"
+document.addEventListener('keydown', (event) => {
+    if (event.code === 'Space') { // Vérifie si la touche "Espace" est pressée
+        event.preventDefault(); // Empêche le défilement de la page
+        heroAttackAction();
+    }
+});
+
+// Ajout d'un événement au clic 
+const attackButton = document.getElementById('attack-btn');
+if (attackButton) {
+    attackButton.addEventListener('click', heroAttackAction);
+}
+
 
 
 

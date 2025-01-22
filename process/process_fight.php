@@ -11,6 +11,7 @@ if (isset($_SESSION['hero'])) {
         $newLevel = $_POST['newLevel'];
         $newHp = $_POST['newHp'];
         $newAttack = $_POST['newAttack'];
+      
 
       
         if ($monHero->getId() == $heroId) {
@@ -18,7 +19,7 @@ if (isset($_SESSION['hero'])) {
             $monHero->setNiveau($newLevel);
             $monHero->setHp($newHp);
             $monHero->setAttack($newAttack);
-
+           
           
     
             $heroRepository = new HeroRepository();

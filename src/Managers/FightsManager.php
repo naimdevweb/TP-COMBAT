@@ -16,6 +16,7 @@ class FightsManager {
     public function setupFight() {
         if (isset($_SESSION['hero'])) {
             $monHero = $_SESSION['hero'];
+           
 
             if ($monHero instanceof Hero) {
                 $this->nomHero = $monHero->getNom();
@@ -60,6 +61,7 @@ class FightsManager {
             <div class="battlefield">
                 <!-- Héros -->
                 <div class="character hero">
+                <audio id="attack-sound" src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1159990/clap.wav"></audio>
                     <h2><?= htmlspecialchars($this->nomHero) ?></h2>
                     <img src="./assets/image/<?= htmlspecialchars($this->imgHero) ?>" alt="" class="image hero">
                     <div class="health-bar">

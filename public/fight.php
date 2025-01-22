@@ -4,7 +4,15 @@ require_once '../utils/autoload.php';
 session_start();
 
 
-$heroId = isset($_GET['id']) ? (int)$_GET['id'] : null;
+if (!isset($_SESSION["hero"])) {
+    header("Location: ../public/home.php?error=nohero");
+    exit();
+}
+
+$hero = $_SESSION["hero"];
+
+$heroId = $hero->getId();
+
 
 
 if (!$heroId) {
