@@ -625,6 +625,7 @@ p {
     font-size: 1.2rem;
     font-weight: bold;
     margin-top: 10px;
+    text-align: center;
 }
 
 /* Animation de l'attaque */
@@ -755,8 +756,6 @@ p {
         font-size: 0.9rem;
     }
 }
-
-
 
     .error-message {
         color: red;
