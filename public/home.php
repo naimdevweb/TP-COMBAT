@@ -32,6 +32,8 @@ if (isset($_GET['nohero'])) {
     $error = htmlspecialchars($_GET['nohero']); 
     echo "<div class='error-message'>$error</div>";
 }
+
+
 ?>
 
 

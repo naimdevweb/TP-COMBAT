@@ -18,8 +18,7 @@ class HeroRepository {
             return null;
         }
 
-        
-        return HeroMapper::mapToObject($data);
+        return new Hero($data['id'], $data['nom'], $data['img'], $data['hp'], $data['attack'], $data['niveau']);
     }
 
     
@@ -34,11 +33,18 @@ class HeroRepository {
 
         $stmt->execute();
 
-        
         $id = $this->db->lastInsertId();
 
-        
         return $this->findHero($id);
+    }
+    
+    public function findAllHeroes() {
+        $stmt = $this->db->query('SELECT * FROM hero');
+        $heroes = [];
+        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+            $heroes[] = new Hero($row['id'], $row['nom'], $row['img'], $row['hp'], $row['attack'], $row['niveau']);
+        }
+        return $heroes;
     }
 
     
@@ -85,6 +91,19 @@ class HeroRepository {
             ); 
         }
         return $heroObjects; 
+    }
+
+    public function findHeroByName(string $name): ?Hero {
+        $stmt = $this->db->prepare("SELECT * FROM hero WHERE nom = :nom");
+        $stmt->bindParam(":nom", $name, PDO::PARAM_STR);
+        $stmt->execute();
+        $data = $stmt->fetch();
+
+        if (!$data) {
+            return null;
+        }
+
+        return new Hero($data['id'], $data['nom'], $data['img'], $data['hp'], $data['attack'], $data['niveau']);
     }
     
 }

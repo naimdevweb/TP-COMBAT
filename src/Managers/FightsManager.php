@@ -13,21 +13,14 @@ class FightsManager {
     private $niveauMonstre;
     private $idHero;
 
-    public function setupFight() {
-        if (isset($_SESSION['hero'])) {
-            $monHero = $_SESSION['hero'];
-           
-            if ($monHero instanceof Hero) {
-                $this->nomHero = $monHero->getNom();
-                $this->hpHero = $monHero->getHp();
-                $this->imgHero = $monHero->getImage();
-                $this->attackHero = $monHero->getAttack();
-                $this->niveauHero = $monHero->getNiveau();
-                $this->idHero = $monHero->getId();
-            } else {
-                header('location: ./home.php');
-                exit();
-            }
+    public function setupFight($hero) {
+        if ($hero instanceof Hero) {
+            $this->nomHero = $hero->getNom();
+            $this->hpHero = $hero->getHp();
+            $this->imgHero = $hero->getImage();
+            $this->attackHero = $hero->getAttack();
+            $this->niveauHero = $hero->getNiveau();
+            $this->idHero = $hero->getId();
         } else {
             header('location: ./home.php');
             exit();
@@ -41,6 +34,8 @@ class FightsManager {
         $this->attackMonstre = $monstre->getAttack();
         $this->niveauMonstre = $monstre->getNiveauMonstre();
     }
+
+    
 
     public function renderFightPage() {
         ob_start();
@@ -61,7 +56,6 @@ class FightsManager {
             <div class="battlefield">
                 <!-- Héros -->
                 <div class="character hero">
-                <audio id="attack-sound" src="../../public/assets/coup_ventre.mp3"></audio>
                     <h2><?= htmlspecialchars($this->nomHero) ?></h2>
                     <img src="./assets/image/<?= htmlspecialchars($this->imgHero) ?>" alt="" class="image hero">
                     <div class="health-bar">
@@ -111,3 +105,4 @@ class FightsManager {
         return ob_get_clean();
     }
 }
+?>
